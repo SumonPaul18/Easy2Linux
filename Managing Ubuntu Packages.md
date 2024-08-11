@@ -1,4 +1,4 @@
-# Managing Ubuntu Packages.txt
+# Managing Ubuntu Packages
 
 Find installed packages
 ####
