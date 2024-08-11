@@ -35,8 +35,10 @@ Check syntax of your updated config file.
 Restart Nginx Services
 
 On Debian/Ubuntu
+
     service nginx reload        
  On CentOS/RHEL
+ 
     systemctl restart nginx    
 
 Verify local network sockets table
