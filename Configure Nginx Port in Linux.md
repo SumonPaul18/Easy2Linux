@@ -8,8 +8,10 @@ Find nginx source files location.
 Open NGINX configuration file
 
 On Debian/Ubuntu
+
     vi /etc/nginx/sites-enabled/default  
 On CentOS/RHEL
+
     vi /etc/nginx/nginx.conf             
 
 Change NGINX port number
