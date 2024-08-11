@@ -9,11 +9,13 @@ Manage iptables-services
     systemctl enable iptables
 ####
 Disable iptables Services
+
     systemctl disable iptables
     
 List of Listing current rules
 ####
 Listing iptables roles
+
     iptables -L
 ####
 Listing iptables roles with line numbers
