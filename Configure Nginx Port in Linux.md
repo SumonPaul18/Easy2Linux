@@ -3,13 +3,14 @@ How to Configure Nginx Port in Linux
 
 Find nginx source files location.
 
-whereis nginx
+    whereis nginx
 
-1. Open NGINX configuration file
+Open NGINX configuration file
 
-# vi /etc/nginx/sites-enabled/default  [On Debian/Ubuntu]
-
-# vi /etc/nginx/nginx.conf             [On CentOS/RHEL]
+On Debian/Ubuntu
+    vi /etc/nginx/sites-enabled/default  
+On CentOS/RHEL
+    vi /etc/nginx/nginx.conf             
 
 Change NGINX port number
 
