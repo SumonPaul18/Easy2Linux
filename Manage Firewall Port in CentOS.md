@@ -1,4 +1,5 @@
 # Manage Firewall Port in CentOS
+Ref: https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-using-firewalld-on-centos-7
 
 Check Port Status
 ####
@@ -21,6 +22,3 @@ Open firewall ports
 Reload Firewall services
 
     firewall-cmd --reload
-
-
-Ref: https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-using-firewalld-on-centos-7
