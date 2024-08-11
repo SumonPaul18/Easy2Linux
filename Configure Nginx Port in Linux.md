@@ -47,6 +47,4 @@ Verify local network sockets table
 
     ss -tlpn| grep nginx
 
-sudo docker run --name docker-nginx -p 80:80 -v ~/docker-nginx/html:/usr/share/nginx/html -v ~/docker-nginx/default.conf:/etc/nginx/conf.d/default.conf -d nginx
-
 End Change Nginx Port
