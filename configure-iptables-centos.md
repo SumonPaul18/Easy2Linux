@@ -1,27 +1,28 @@
-#How to configure iptables on CentOS
-#Install iptables-services
+# How to configure iptables on CentOS
+Install iptables-services
+####
+    yum install iptables-services -y
+Manage iptables-services
+####
+    systemctl status iptables
+    systemctl start iptables
+    systemctl enable iptables
+####
+    systemctl disable iptables
+    
+List of Listing current rules
+####
+    iptables -L
+####
+    iptables -L --line-numbers
 
-yum install iptables-services -y
+Adding new iptables rules <br>
+iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+####
+    iptables -A INPUT -p tcp --dport ssh -j ACCEPT
+####
+    iptables -A INPUT -p tcp --dport 80 -j ACCEPT
 
-systemctl status iptables
-systemctl start iptables
-systemctl enable iptables
-
-
-
-#Listing current rules
-
-iptables -L
-
-iptables -L --line-numbers
-
-#Adding rules
-#iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
-
-iptables -A INPUT -p tcp --dport ssh -j ACCEPT
-
-iptables -A INPUT -p tcp --dport 80 -j ACCEPT
-
-#Saving and restoring rules
-
-service iptables save
+Saving and restoring rules
+####
+    service iptables save
