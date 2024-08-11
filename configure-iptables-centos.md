@@ -14,8 +14,6 @@ Disable iptables Services
     
 List of Listing current rules
 ####
-Listing iptables roles
-
     iptables -L
 ####
 Listing iptables roles with line numbers
