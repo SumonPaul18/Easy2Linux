@@ -1,0 +1,6 @@
+#yum server configure
+df -HT [memory check]
+mount /dev/sr0 /mnt [mount dvd in mnt directory]
+
+rm -rf* [delete all file in the current path]
+du -ch Packages [show Packages directory details]

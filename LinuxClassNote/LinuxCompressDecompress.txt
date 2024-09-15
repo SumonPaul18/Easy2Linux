@@ -1,0 +1,42 @@
+#Compress
+tar -cvjf desktopbackup.bz2 linux/ redhat/ rhcsa/ myfile.txt 
+[-c=create a archive file]
+[-v=verbose]
+[j=.bz2]
+[f=file]
+tar= is a command
+-cvjf= option
+desktopbackup.bz2= compressed file name
+linux/ redhat/ rhcsa/ myfile.txt= target folder or file name
+
+#archive option
+-f=filename
+-v=verbose
+-c=create an archive
+-j=.bz2
+-z=gzip
+-x=xtract
+-t-list the contents
+
+#remove multiple dir & file
+rm -rvf linux/ redhat/ rhcsa/ myfile.txt
+
+#show compress file
+tar -tvf desktopbackup.bz2
+
+#decompress
+tar -xvjf desktopbackup.bz2
+
+#redirect compressed file to new directory
+mkdir desktopitems
+tar -xvjf desktopbackup.bz2 -C desktopitems
+
+#compress gzip format
+tar -cvzf desktopgzip.gzip linux/ redhat/ rhcsa/ myfile.txt
+
+#decompress gzip format
+tar -xvzf desktopgzip.gzip linux/ redhat/ rhcsa/ myfile.txt
+
+
+
+

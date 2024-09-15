@@ -1,0 +1,17 @@
+#ssh info
+    [ssh have is two keys:
+        1. public key
+        2. private key
+        when a user do ssh connection to another host then this another host provide a public key which save in source host user home directory create a hiden .ssh/ directory in know_hosts file do added distination host public key.
+        
+        
+#ssh configure
+    ssh root@severa.redhat.local
+    
+    
+#keybased ssh
+ssh-keygen [make own ssh keys in this host]
+ssh-copy-id root@servera.redhat.local [copy public key to remote host]
+
+#ssh file configuration location
+/ etc/ssh

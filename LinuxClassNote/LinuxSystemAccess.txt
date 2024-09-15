@@ -1,0 +1,8 @@
+Root Prompt = #
+Normal User prompt = $
+system reboot = init 6 / reboot
+system poweroff = poweroff / init 0
+linux default shell = bash shell
+which shell we are using = echo $SHELL 
+~ is called tail the tail is the user home directory
+ 

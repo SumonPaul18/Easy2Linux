@@ -1,0 +1,12 @@
+Press - e
+linux line in the end given space - rd.break
+ctrl + x
+
+switch_root:/# - mount | grep sysroot
+mount -o remount.rw /sysroot/
+chroot /sysroot
+passwd
+touch /.autorelabel
+exit
+logout
+

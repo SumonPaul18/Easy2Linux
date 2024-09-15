@@ -1,0 +1,33 @@
+wget http://example.com -download from internet
+mount windows.iso /mnt
+rpm -qa -show rpm list
+rpm -qa |wc -l -show how many rpm installed
+rpm -ivh [httpd] -install package
+rpm -qa |grep [httpd] -package install location
+rpm -e [httpd] -release
+rpm -qpi [httpd] -show package
+rpm -qpl [] |less -show where is install location
+rpm -qpc []
+rpm -qpd []
+rpm -qf 
+yum info httpd
+yum provides /etc/httpd
+yum install httpd
+yum remove httpd
+locate -i [] -show locate file case sensative
+updatedb -update locate db 
+find / -name [message] -search file
+find / -user student
+find /home -perm 764
+touch /home/test
+chmod 764 /home/test
+find / -size 10M
+find / -size +10M
+find / -size -10M
+find / -mmin 120 -find selected time modified file
+find /etc -type f -find file
+find /etc -type d -find folder |wc -l
+
+
+
+'*.txt'

@@ -1,0 +1,59 @@
+User administration:
+1.	To create a new user:
+     useradd /adduser  username
+2.	To set user password:
+      passwd username
+3.	T o lock user password:
+       passwd  -l  username
+4.	 To  unlock username:
+       passwd  -u username 
+5.	User can login only  user name with out  password:
+       Passwd   -d  username
+6.	How to change  users  home directory:
+        useradd   -d  home_directory   username (for new user)
+        usermod   -d home_directory  username(for existing user) 
+7.	How expire  users  account:
+         usermod  -e  yyyy/mm/dd  username
+or 
+         chage   -E   yyyy/mm/dd      username
+8.	How to change user login shell:
+         chsh  -s    shell name  username
+9.	How to change user login ID:
+             useradd  -u   username(for new user)
+             usermod   -u  username(for existing user)
+10.	Create a  group:
+               groupadd   groupname
+11.	 To take a  user  as a member of  secondary  group.
+                    useradd  -G  groupname  usernme(for new user) 
+                   user mod  -G  groupname  username(for existing user)
+12.	To  take a  user  as  member of  more secondary  group:
+           usermod   -G  groupname1,groupname2,groupnme3    username 
+13.	To take  more user  into  a group.
+          gpasswd  -M  username1,username2,username3   groupname
+14.	To see user info:
+         finger  username
+         chage -l username
+15.	To  remove user   without   user  home directory:
+         userdel    username
+16.	    To  remove user   with   user  home directory:
+         userdel   - r   username
+
+
+17.	To   remove  groupname:
+         groupdel   usernme 
+18.	To   change  group name:
+        groupmod  -n  newname  oldname
+19.	 To change  an existing users  login name:
+        usermod  -l  newname   homedirectory      old_name  
+
+20.	 How to remove  a user from  a group:
+        gpasswd -d user group
+
+
+
+
+
+
+
+
+   

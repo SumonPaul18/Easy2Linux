@@ -1,0 +1,79 @@
+ifconfig -show ip information
+
+nmtui -network management tools for graphically
+
+vim /etc/sysconfig/network-scripts/ifcfg-[enp0s3] - it your connected interface name it can be variable on your machine.
+
+nmcli connection -show interface
+nmcli connection modify enp0s3 ipv4.method manual
+nmcli connection modify enp0s3 ipv4.addresses 192.168.0.50/24
+nmcli connection modify enp0s3 ipv4.gateway 192.168.0.1
+nmcli connection modify enp0s3 ipv4.dns 192.168.0.1
+nmcli connection up enp0s3
+
+......................................................
+nmcli connection show -show nic name and network profile
+ifconfig -show brief short IP connection info
+ip addr show -show detail ip info
+ip addr show eno1 -show selected interface info
+ip -s link show eno1 -show statistics selected int
+ip route -show ip routing table
+ping -c3 8.8.8.8 -check connection 3 time useing option -c
+traceroute 8.8.8.8 -show selected ip tracing
+trachpath 8.8.8.8 -show selected ip tracing
+ss -ta -show port and services info  
+netstat -samiler ss command
+/etc/sysconfig/network-scripts -network configuration file location
+ll -show list
+**networkManager is a daemon**
+**grub file is a bootmanager file**
+(vim /etc/default/grub -show booting file info and change (:set nu -set line number)
+grub_cmdline_linux=" " -this is boot editing line
+net.ifnames=0 bisdevname=0 -change default net device name
+grub2-mkconfig -o /boot/grub2/grub.cfg -redirect default grup file to main grup file for reinstall)
+**nmcli -network manager command line interface**
+nmcli device -show network device info
+nmcli dev status -show network device info briefly
+nmcli device show -show full details network device info
+nmcli device show eno1 -selected device info
+nmcli connection show -show network profile
+nmcli connection delete eno1 -delete seleted network profile not device
+nmcli connection add con-name inet ifname eno1 type ethernet ip4 10.10.10.10/24 gw4 10.10.10.1 -add profile and ip address
+**deamon is a network manager**
+nmcli connection modify eno1 ipv4.method manual -add connection mode
+nmcli connection modify eno1 connection.autoconnect yes
+nmcli connection modify eno1 ipv4.dns 8.8.8.8 -add dns server
+nmcli connection modify eno1 ipv4.dns "8.8.8.8 192.168.0.1" -add  2 dns server
+systemctl restart network -restart network
+vim /etc/resolv.conf -show dns configuration file
+systemctl restart network.service -restart network.service
+nmcli connection modify eno1 +ipv4.addresses 11.11.11.10/24 -add alternate ip address is same interface
+nmcli connection show eno1 -show for alternate ip
+nmcli connection up eno1 -active selected interface
+nmcli connection down eno1 -down selected interface
+nmcli con show --active -show activc interface
+nmcli con show "static-eno1" -show static ip  
+nmcli con add con-name "default" type ethernet ifname eno1 -autoconnet on dhcp
+nmcli con up "static" -up static connection
+nmcli con up "default" -up automatic connection
+nmcli dev disconnect eno1 -selected device disconnect
+nmcli con add help -for help
+nmcli con add mod "static" ipv4.addresses "172.16.0.10/24 172.16.0.1" -change for ip 
+**ifcfg-<network profile name> is a network profile configuration file**
+nmcli con reload -reload connection
+nmcli con down "system eno1" -down selected interface
+
+ 
+
+  
+
+ 
+
+
+
+
+
+
+  
+
+

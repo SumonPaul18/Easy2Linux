@@ -1,0 +1,150 @@
+**  Different types of users:
+ 
+1. Generally there are 2 types of Users:
+    a. Super-user (Root)
+    b. Normal User
+ 
+2. Super-user can do anything in the system. He can:
+    a. Create new users.
+    b. Give permission to users.
+    c. Install packages.
+    d. Even delete any directory.
+    e. Change file system etc.
+ 
+3. Normal users cannot do administrative work.
+ 
+4. All users except 'root' are normal users.
+ 
+5. You can give root privileges to normal users.
+ 
+ 
+** File System Hierarchy :
+ 
+" Directory ≡ Folder "
+ 
+1. /root : 'root' user's profile/home directory. 'root' user's personal files i.e. 'Desktop', 'Downloads', 'Documents', 'Videos' etc. resides here.
+ 
+If you want to login as 'root', click on the 'Not listed' option on the login screen in a GUI.
+ 
+2. /home : Every normal users' home directory. If a system has 2 normal users 'sysop' & 'devop' their home directories will be '/home/sysop' & '/home/devop' respectively.
+ 
+[ Not important right now ]
+* To create a new user:
+    # useradd user_name
+    # passwd user_name
+ 
+* To go to /home use any of these commands.
+    $ cd
+    $ cd ~
+    $ cd $HOME
+[ END ]
+ 
+After creating a new user you have to login as that new user to populate it's home directory. Otherwise, the home directory '/home/user_name' will be empty.
+ 
+3. /bin : Commands are installed here. Commands like, 'ls', 'pwd', 'cp' etc. Both normal users and 'root' users can access the commands of this directory. This directory is by default in the path.
+ 
+[ Not important right now ]
+* To see the contents of the path:
+    $ echo $PATH
+[ END ]
+ 
+4. /sbin : Commands that are only accessible by the 'root' user are stored here. Commands like, 'fdisk', 'ifconfig', 'reboot' etc.
+ 
+5. /lib : Library files for 32 bit applications.
+ 
+6. /lib64 : Library files for 64 bit applications.
+ 
+* From RHEL 7 and later /bin, /sbin, /lib, /lib64 directories are symbolic links to the matching directories in /usr. So, /bin & /user/bin, /sbin & /usr/sbin, /lib & /usr/lib and /lib64 and /usr/lib64 have identical contents.
+ 
+" Symbolic link ≡ Shortcuts "
+ 
+7. /usr : Softwares are installed here. Important sub-directories : /usr/bin, /usr/sbin, /usr/lib, /usr/lib64.
+ 
+This directory is also called the "Documentation Directory". Every installed softwares documentation can be found in '/usr/share/doc'
+ 
+8. /media : If a removable disk mounts automatically, it will mount on '/run/media' i.e. run-time media mount.
+ 
+9. /mnt : If you have to manually mount a removable disk, you can mount it on '/mnt'.
+ 
+" Mount ≡ Attach "
+ 
+[ Not important right now ]
+* To see free disk space in human readable form:
+    # df -h
+ 
+* To mount a disk manually:
+    # mount device_path path_to_mount
+ 
+* To unmount a disk:
+    # umount path_of_mounted_device
+ 
+* To see disk partitions:
+    # fdisk -l
+ 
+* Various components of a command:
+    $ ls -l /etc
+ 
+    Here, 'ls' is the command, '-l' is the option and '/etc' is the argument.
+[ END ]
+ 
+10. /etc : Some call it "Editable Text Configuration". Linux system's default configuration files and application configuration files reside here. System configuration files like: 'chrony.conf', directories like 'crypttab', 'fstab'.
+ 
+[ Not important right now ]
+* httpd (Apache Web Server)
+* vsftp (FTP Server)
+* Users' passwords are stored in '/etc/passwd'
+[ END ]
+ 
+11. /dev : Contains all device files that are needed to access the device. 
+ 
+'/dev/sda1', '/dev/sda2' represents various partitions in the master drivers. for external drivers there maybe 'sdb', 'sdc' etc.
+ 
+12. /boot : Contains files that are needed to start the boot process. If this directory gets deleted or corrupted user "GRUB (Grand Unified Bootloader)"  rescue.
+ 
+13. /opt : Third party softwares can be installed here. e.g. OracleDB.
+ 
+When the Linux system gets updated, every directory will be updated, if an update is available, except this '/opt' directory.
+ 
+[ Not important right now ]
+* mirror : Linux's repository server
+[ END ]
+ 
+14. /proc : A virtual directory. Contains current system information in text format. e.g. Process information, memory information, CPU information, Partitions etc.
+ 
+When the system shuts down, this directory gets empty. When the system boots again, it gets populated again.
+ 
+[ Not important right now ]
+* To see CPU information
+    # cat /proc/cpuinfo
+[ END ]
+ 
+15. /var : Variable data specific to the system resides here. Files that dynamically change, such as databases, cache directories, log files, printer-spooled documents, and website content. e.g.
+ 
+* /var/log/message - System activity messages. Needed for troubleshooting.
+ 
+* /var/spool/mail - Every user has a spooler mail. Mails that are not delivered will be stored here.
+ 
+* /var/www/html - Contains Apache webserver's 'index.html' file.
+ 
+* /var/tmp - Temporary directory. Files that have not been accessed, changed, or modified in more than 30 days are deleted automatically.
+ 
+* /var/ftp/pub - Contains FTP server data.
+ 
+This directory contains "Persistent Content" i.e. contents of this directory remain between reboots.
+ 
+16. /tmp : When starting up an application, some library files are used. These library files are dumped in this directory when starting up the app. After the app has been started, these files are of no use. 
+ 
+When downloading a file using the browser, the download is initiated on this directory.
+ 
+Files that have not been accessed, changed, or modified in more than 10 days are deleted automatically.
+ 
+17. /srv : Service specific data folder. e.g. can put data used by the OracleDB or Apache Web Server.
+ 
+18. /sys : Contains kernel.
+ 
+19. /run : Contains a program's run-time information. e.g. PID files, lock files etc.
+ 
+ 
+
+
+

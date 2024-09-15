@@ -1,0 +1,7 @@
+Directory path is types
+1. Absolute path ex: cd/Redhat/Redhat8/Redhat Notes
+2. Relative path ex: cd/Redhat, cd/Redhat8, cd/Redhat Notes
+
+ls -l ex: Long listing
+ls -lR ex: List recursively
+ls -a ex: show with hiden contain
