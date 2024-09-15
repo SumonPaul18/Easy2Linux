@@ -1,0 +1,185 @@
+==================================
+Linux Common Configuration
+==================================
+
+==================================
+#check version
+==================================
+cat /proc/version				- check OS version
+or
+cat /etc/*release				- check OS with details
+or
+cat /etc/redhat-release			- check OS brief
+
+==================================
+#set hostname
+==================================
+vi /etc/hostname 
+kpldb
+or
+hostnamectl set-hostname network
+or
+hostnamectl set-hostname "kpl.kumudini-pharma.com"
+exec bash					- without restart for set-hostname 
+
+==================================
+NetworkConfiguration
+==================================
+nmcli connection                                    -show interface
+nmcli connection modify enp0s3 ipv4.method manual
+nmcli connection modify enp0s3 ipv4.addresses 192.168.0.50/24
+nmcli connection modify enp0s3 ipv4.gateway 192.168.0.1
+nmcli connection modify enp0s3 ipv4.dns 192.168.0.1
+nmcli connection up enp0s3
+
+ifup enp0s3
+
+nmcli device -show network device info
+nmcli dev status -show network device info briefly
+nmcli device show -show full details network device info
+
+==================================
+# Manually Configure static ip network 
+==================================
+ip a
+cat /etc/sysconfig/network-scripts/ifcfg-enp0s3
+
+nano /etc/sysconfig/network-scripts/ifcfg-enp0s3            -[enp0s3] is connected interface name.
+	
+##edit selected network-card change static & add IP info 
+
+BOOTPROTO=static
+
+IPADDR=192.168.1.10
+NETMASK=255.255.255.0
+GATEWAY=192.168.1.1
+DNS1=192.168.1.1
+DNS2=8.8.8.8
+#DOMAIN=paulco.xyz
+
+==================================
+#nmtui using GUI Mode for ip configuration
+==================================
+nmtui						- add static ip gui-mode
+
+==================================
+#restart network manager
+==================================
+systemctl restart NetworkManager
+
+==================================
+#IP add in hosts file
+==================================
+vi /etc/hosts
+192.168.3.14 kpldb kpldb.kumudini.com
+or
+echo -e "192.168.3.5 kpl.kumudini-pharma.com kpl" ## /etc/hosts
+
+==================================
+#install network-tools if not installed
+==================================
+yum install net-tools -y			- install network tools
+
+==================================
+#How Install Cockpit in centos
+==================================
+yum install cockpit
+
+systemctl start cockpit.socket
+systemctl enable --now cockpit.socket
+systemctl status cockpit.socket
+ps auxf|grep cockpit
+
+firewall-cmd --add-service=cockpit --permanent
+firewall-cmd --reload
+
+https://192.168.3.19:9090
+
+==================================
+#check repolist
+==================================
+yum repolist all
+
+==================================
+#check sshd status
+==================================
+systemctl status sshd
+
+==================================
+#find any package installed or not
+==================================
+rpm -qa mariadb					- mariadb is a package name
+
+==================================
+#how to install screen command for restore screen
+==================================
+yum install epel-release -y
+yum install screen -y
+screen                          - create simple screen session
+screen -S myscreen              - create screen session with a name
+screen -ls                      - list of view previous screen
+screen -r 85491                 - restore previous screen ID
+Ctrl-a + Ctrl-d                 - detach from the screen session
+
+==================================
+#Install wget command
+==================================
+yum install wget -y
+
+==================================
+#How to install Perl
+==================================
+rpm -qa | grep perl
+yum info perl 
+yum install perl -y
+perl -v
+
+==================================
+#How to copy any orginal file or directory
+==================================
+cp /etc/opendkim.conf{,.orgi}
+ls /etc/opendkim.conf*
+
+==================================
+#Performance Monitorining in Linux
+==================================
+#Linux Process Monitoring
+top
+
+#Virtual Memory Statistics
+vmstat
+
+#List Open Files
+lsof
+
+#Network Packet Analyzer
+tcpdump -i enp0s3       -given interface name
+
+#Network Statistics
+netstat -a | more
+
+#Linux Process Monitoring
+htop
+
+#Monitor Linux Disk I/O
+iotop
+
+#Input/Output Statistics
+iostat
+
+#Real-Time IP LAN Monitoring
+IPTraf
+
+#Monitor User Activity
+psacct
+
+acct
+
+#Monitor Per Process Network Bandwidth
+nethogs
+
+#Network Bandwidth Monitoring
+iftop
+
+==================================
+

@@ -1,0 +1,179 @@
+*************************
+https://www.tecmint.com/create-local-http-yum-dnf-repository-on-rhel-8/
+
+*************************
+#Check the status of your firewall.
+ - firewall-cmd --state
+#How to add firewall services with name.
+ - firewall-cmd --zone=public --permanent --add-service=http
+ - firewall-cmd --zone=public --permanent --add-service=https
+ - firewall-cmd --reload
+#How to add firewall services with port.
+ - firewall-cmd --zone=public --permanent --add-port=80/tcp
+#How to check firewall allow list.
+ - firewall-cmd --list-all
+#How to remove firewall Services
+ - firewall-cmd --zone=public --permanent --remove-service=http
+ - firewall-cmd --zone=public --permanent --remove-service=https
+
+*************************
+
+
+How copy to reachable network
+scp file.txt remote_username@10.10.0.2:/remote/directory
+
+How to password less ssh connection
+#ssh-keygen
+#ssh-copy-id node2 [node2 is target machine]
+
+check installed package
+#rpm -qa | grep ansible
+
+How to check EPEL Repo on CentOS
+# yum search epel-release
+# yum info epel-release
+
+How to Install EPEL Repo on CentOS
+# yum install epel-release
+
+How Do I Verify EPEL Repo
+# yum update
+# rpm -qa | grep epel
+# yum repolist
+
+install epel repo perpose ansible pre-requisite
+# yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+    
+install ansible
+#yum install ansible -y
+
+check ansible version
+#ansible --version
+
+check phython version
+ansible -m setup localhost | grep ansible_python_version
+
+check ansible inventory listed host
+for all host
+#ansible all --list-host 
+for individual host
+#ansible [individual host or group name] --list-host
+
+how to use ad-hoc command in ansible
+ansible -m command -a 'lsblk' webserver 
+
+how to apply ad-hoc command and store output in .txt file
+ansible -m command -a 'df-HT' webserver > /root/hdd.txt
+
+--Queckest Apply Ansible--
+> configure ansible host file
+    #vim /etc/ansible/host
+        [webserver]
+        192.168.100.30 ansible_ssh_user=root ansible_ssh_pass=centos
+> now create a simple playbook
+    #vim webserver.yml [must have yml extension]
+    ---
+    - name: webserver
+      hosts: webserver [mention specefic hosts group from inventory file]
+      remote_user: root
+      become: true
+      tasks: 
+        - name: install httpd
+          yum:
+            name: httpd
+            state: latest
+        - name: run httpd
+          service:
+            name: httpd
+            state: started
+        - name: create content
+          copy:
+            content: "Welcome the Ansible Lab"
+            dest: /var/www/html/index.html
+            
+> now verify playbook
+#ansible-playbook webserver.yml --syntax-check
+ playbook: webserver [if it's all ok show playbook name]
+ 
+ 
+> now deploy playbook
+#ansible-playbook webserver.yml
+
+How to easy edit yml extension file:
+#vim ~/.vimrc
+[autocmd FileType yaml setlocal ai et cuc cul ts=2 sw=2] -now save(it's work only yml file) 
+
+
+................................................................
+Given sudo privilege. It's edit on manage host or control host mainly manage host
+#isudo
+#ansible ALL=(ALL) NOPASSWD: ALL [this line add under root ALL=(ALL) ALL or any place. here ansible is a normal user.
+................................................................
+.yaml file custome edit for add a line
+#vim sudoer (no compelete)
+................................................................
+
+How to Create Partition using ansible
+- name: Create a new ext4 primary partition
+    device: /dev/sdb
+    number: 1
+    state: present
+    fs_type: ext4
+
+- name: Remove partition number 1
+    device: /dev/sdb
+    number: 1
+    state: absent
+
+- name: Create a new primary partition with a size of 1GiB
+    device: /dev/sdb
+    number: 1
+    state: present
+    part_end: 1GiB
+
+- name: Create a new primary partition for LVM
+    device: /dev/sdb
+    number: 2
+    flags: [ lvm ]
+    state: present
+    part_start: 1GiB
+    
+    @@@@@@@@@@@@@@@@@@@@@@@@
+    Another Best Ways
+    
+ - name: "Add new partition /dev/sda2"
+      parted: 
+        device: "/dev/sda"
+        number: "1"
+        part_type: primary
+        flags: [ lvm ]
+        state: present
+        part_end: "100%"
+        
+        *********************************
+        How to create vg using ansible
+        tasks:
+            - name: vgcreate
+              lvg:
+                vg: research
+                pvs: /dev/sdb4, /dev/sdb5
+            
+            - name: lvcreate
+              lvol: 
+                vg: research
+                lv: data
+                size: 1500m
+*****************************
+How to install git for ansible roles deploy
+yum install git -y
+*****************************
+
+Ansible Galaxy role download location
+
+       https://github.com/geerlingguy
+........................................
+
+
+                
+
+

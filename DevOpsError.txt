@@ -1,0 +1,34 @@
+Ref: 
+#How to Fix Error: Failed to Download Metadata for Repo ‘AppStream’
+1. https://www.tecmint.com/error-failed-to-download-metadata-for-repo-appstream/
+
+#When do yum update Then face Bellow type Error
+>> Error: Failed to download metadata for repo 'AppStream'
+
+Solution:
+1. yum repolist
+2. add public baseurl
+cd /etc/yum.repos.d/
+sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
+sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
+
+yum update -y
+
+2. Migrate to CentOS Stream 8 or an alternative distro
+dnf --disablerepo '*' --enablerepo=extras swap centos-linux-repos centos-stream-repos -y
+dnf distro-sync -y
+
+yum update -y
+
+..........................
+#When do use yum for install/remove app Then face Bellow type Error
+Error: bash: yum: command not found
+Solution:
+1. 
+apt-get update -y
+
+..........................
+#docker: driver failed programming external connectivity on endpoint
+Solution:
+1. 
+service docker restart

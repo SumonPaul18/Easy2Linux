@@ -1,0 +1,28 @@
+
+yum install openssh-server -y
+
+systemctl start sshd
+
+systemctl enable sshd
+
+systemctl status sshd
+
+firewall-cmd --zone=public --add-port=2222/tcp --permanent
+
+firewall-cmd --reload
+
+semanage port -a -t ssh_port_t -p tcp 2222
+
+vim /etc/ssh/sshd_config
+-------
+        |
+        |
+-------
+service sshd restart
+
+<< Now Check SSH >>
+
+
+
+
+

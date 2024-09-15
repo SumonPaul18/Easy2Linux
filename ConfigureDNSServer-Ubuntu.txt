@@ -1,0 +1,195 @@
+++++++++++++++++++++++++++++++++++++++++
+How to configure DNS Server on Ubuntu
+++++++++++++++++++++++++++++++++++++++++
+
+ip a
+
+hostname
+
+hostname --fqdn
+
+nano /etc/hosts
+
+cat /etc/resolv.conf
+
+apt update -y
+
+apt upgrade -y
+
+apt list --installed | grep bind9
+
+apt install bind9 bind9-doc bind9utils dnsutils -y
+
+ufw app list
+
+netstat -antu | grep 53
+
+#ufw allow Bind9
+
+cd /etc/bind/
+
+nano /etc/default/named
+OPTIONS="-u bind -4"
+    
+systemctl status named
+systemctl start named
+systemctl restart named
+systemctl restart bind9
+
+#Check DNS Configuration files location:
+#Here, we see 3 files location included, there are is default.
+#Don't need change here.
+
+cat /etc/bind/named.conf
+
+
+#Define global server configuration options
+
+nano named.conf.options
+
+acl "untrusted" {
+        0.0.0.0/8; 
+        224.0.0.0/3; 
+        10.0.0.0/8; 
+        172.16.0.0/12;
+};
+
+acl "trusted" {
+        192.168.0.0/24;    # my lan Network 
+        #10.128.20.12;    # define specefic lan host 
+        #10.128.100.101;  # host1
+        #10.128.200.102;  # host2
+};
+
+#Add line Under option section.
+
+    #directory "/etc/bind";
+    
+    recursion yes;
+    allow-recursion { localhost; trusted; };
+    listen-on port 53 { localhost; 10.200.11.9; };
+    allow-query {localhost; trusted;};
+    allow-transfer { none; };
+    blackhole { untrusted; };
+    
+    forwarders { 8.8.8.8;
+                 8.8.4.4;
+                 };
+    
+named-checkconf /etc/bind/named.conf.options  
+
+#Configure DNS Server Zone Statements
+    
+nano /etc/bind/named.conf.local
+
+zone "paulco.xyz" IN {
+    type master;
+    file "/etc/bind/forward.paulco.xyz";
+    allow-update {none;};
+    
+    };
+    
+zone "0.168.192.in-addr.arpa" IN {
+        type master;
+        file "/etc/bind/reverse.paulco.xyz";
+        allow-update { none; };
+};    
+    
+
+cat /etc/bind/named.conf.local
+
+#Create Forward  Zone File
+
+#cp /etc/bind/db.local /etc/bind/fwz.paulco.xyz
+
+nano /etc/bind/forward.paulco.xyz
+    
+
+
+$TTL    604800
+@       IN      SOA     ns1.paulco.xyz. root.paulco.xyz. (
+                              5         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+
+;
+
+@       IN      NS      ns1.paulco.xyz.
+        IN      NS      ns2.paulco.xyz.
+ns1     IN      A       192.168.102.250
+ns2     IN      A       192.168.102.251
+mail    IN      A       192.168.102.250
+
+@       IN  MX 10   mail.paulco.xyz.
+
+
+#Create Reverse Zone File
+
+#cp /etc/bind/db.127 /etc/bind/rvz.paulco.xyz
+
+nano /etc/bind/reverse.paulco.xyz
+
+
+
+$TTL    604800
+@       IN      SOA     ns1.paulco.xyz. root.paulco.xyz. (
+                              5         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+
+
+@       IN      NS      ns1.paulco.xyz.
+        IN      NS      ns2.paulco.xyz.
+@   IN  MX 10   ns1.paulco.org.
+
+250   IN      PTR     ns1.paulco.xyz.   ; 192.168.102.250
+251   IN      PTR     ns2.paulco.xyz.   ; 192.168.102.251
+250   IN      PTR     mail.paulco.xyz.   ; 192.168.102.250
+
+#Verify Zone Configuration Syntax
+
+named-checkconf
+
+named-checkzone paulco.xyz /etc/bind/forward.paulco.xyz
+
+named-checkzone 102.168.192.in-addr.arpa /etc/bind/reverse.paulco.xyz
+
+
+service named restart
+service bind9 restart
+service bind9 status
+
+#Verify
+
+nano /etc/resolv.conf
+nameserver 192.168.0.249
+
+systemd-resolve --status
+
+resolvectl status
+
+host -a paulco.xyz
+
+dig paulco.xyz
+
+dig paulco.xyz MX 
+
+dig -x 202.4.111.68
+
+nslookup mail.paulco.xyz
+
+nslookup 202.4.111.68
+
+nslookup -query=mx mail.paulco.xyz
+
+nslookup
+> paulco.org
+> set q=mx
+> paulco.org
+
+++++++++++++++++++++++++++++++++++++++++

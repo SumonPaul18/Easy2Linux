@@ -1,0 +1,23 @@
+
+Once it is installed if want to verify we can use this command.
+#rpm –qa | grep cockpit
+
+To install the cockpit first we install the cockpit through yum server.
+# yum install cockpit*
+
+After installing the package need to start the service.
+# systemctl start cockpit
+
+We can verify our cockpit service is running or not through this command.
+#systemctl status cockpit
+
+At last in the configuration step we need to allow cockpit service through the firewall.
+# firewall-cmd -–permanent -–add-service=cockpit
+# firewall-cmd -–reload 
+
+If it is already allowed from the firewall so no need to do this step just verify it with using this command and you will see the cockpit is already added in services.
+# firewall-cmd -–list-all
+
+Note: Must add default cockpit port:9090
+
+.........End........

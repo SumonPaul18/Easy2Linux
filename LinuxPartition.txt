@@ -1,0 +1,42 @@
+### Linux Partition
+
+All disk file contain in dev
+
+/dev	
+
+1st disk name
+
+/dev/sda
+	 
+Show Partition
+
+fdisk -l		
+
+Show Filesystem Partition
+
+lsblk 		
+
+File System Format Code:
+
+ext3,ext4,xfs fs type id= 83
+swap=82
+LVM=8e
+extended=5
+ntfs=7
+
+Create Partition and open fdisk consol
+
+fdisk /dev/sda 
+
+Mount approve
+
+Mount -a
+
+Show free disk or partition
+
+Parted 
+
+
+
+				
+	

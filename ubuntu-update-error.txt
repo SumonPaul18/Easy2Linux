@@ -1,0 +1,88 @@
+
+apt update
+
+#Failed to fetch http://nova.clouds.archive.ubuntu.com/ubuntu/dists/jammy-backports/main/i18n/Translation-en.xz File has unexpected size (11032 != 10524). Mirror sync in progress? [IP: 192.168.100.246 80]
+
+#Solution:
+
+sudo apt clean
+
+sudo apt-get autoremove
+
+sudo apt-get autoclean
+
+sudo apt install apt-transport-https
+
+sudo apt upgrade -y
+
+#Distribution Upgrade
+
+apt-get dist-upgrade
+
+cat /etc/apt/sources.list
+
+#Backup apt source file
+
+cp /etc/apt/sources.list /etc/apt/sources.list.backup
+
+#Change the source or just the country of apt repositories using sed or your favorite text editor.
+
+sed -i "s/\/jp\./\/us\./g" /etc/apt/sources.list
+
+
+#Upgrade installed packages using the new repositories.
+apt dist-upgrade --assume-yes
+
+#sudo do-release-upgrade
+
+#Adding repositories in Ubuntu
+apt-add-repository ‘deb http://repository_address version branch’
+
+#Removing repositories
+add-apt-repository --remove 'deb [arch=amd64,arm64,ppc64el] http://mirror.mephi.ru/mariadb/repo/10.5/ubuntu focal main'
+
+#Check Repo List
+
+apt-add-repository --list
+
+
++++++++++++++++++++++
+
+sudo sed -i 's|http://us.|http://|g' /etc/apt/sources.list
+
+#This command should do the trick:
+
+sudo sed -i 's|http://us.|http://|g' /etc/apt/sources.list
+It will remove the 'us.' prefix in each of the addresses to convert them to addresses of the main server.
+
+Of course replace 'us' by any other mirror you are using.
+
+In depth explanation of command:
+
+sed - stream editor for filtering and transforming text.
+
+The -i argument is to edit a file in place.
+
+Then 's|regexp|replacement|g', s specifying the search and replace command.
+
+The g at the end being the argument to "globally" search.
+
+Conclusion: replaces all occurrences of http://us. with http:// in the file /etc/apt/sources.list.
+
++++++++++++++++++++++
+
+#How To Set or Change Timezone on Ubuntu
+
+timedatectl
+
+cat /etc/timezone
+
+timedatectl list-timezones
+
+#Set Timezone on Ubuntu using command
+
+timedatectl set-timezone Asia/Dhaka
+
+++++++++++++++++++++++++++++++++++
+
+

@@ -1,0 +1,58 @@
+<<How to Install NTP in RHEL 8 or CentOS 8>>
+.......Works On Server.......
+
+# dnf install chrony
+
+# systemctl start chronyd
+# systemctl status chronyd
+# systemctl enable chronyd
+
+# vi /etc/chrony.conf
+
+allow 192.168.56.0/24
+
+# systemctl restart chronyd
+
+# firewall-cmd --permanent --add-service=ntp
+# firewall-cmd --reload
+
+# chronyc sources
+# timedatectl set-ntp yes
+# systemctl enable systemd-timedated.service
+If it's show failed Then do some troubleshoot.
+Note: #systemctl list-unit-files (show for service enable, disable status).
+# systemctl unmask systemd-timedated.service
+# systemctl restart systemd-timedated.service
+# timedatectl set-timezone Asia/Dhaka
+
+# chronyc tracking
+# chronyc sources 
+# chronyc sourcestats 
+
+.......Works On Client........
+
+# yum install chrony
+
+# systemctl start chronyd
+# systemctl enable chronyd
+# systemctl status chronyd
+
+# vi /etc/chrony.conf
+
+server 192.168.56.110
+
+
+# systemctl restart chronyd
+
+
+....Verify....
+
+# chronyc sources 
+# chronyc clients
+# timedatectl list-timezones | grep Asia
+
+
+.....For Manual.....
+
+# man chronyc
+
